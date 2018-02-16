@@ -4,5 +4,5 @@ Type "copyright", "credits" or "license()" for more information.
 >>> user2 = [i for i in range(10,25)]
 >>> set(user1).intersection(user2)
 {10, 11, 12, 13, 14}
->>> 
-р
+>>> print(user1)
+
