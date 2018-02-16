@@ -5,3 +5,4 @@ Type "copyright", "credits" or "license()" for more information.
 >>> set(user1).intersection(user2)
 {10, 11, 12, 13, 14}
 >>> 
+р
