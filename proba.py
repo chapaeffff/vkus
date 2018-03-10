@@ -7,11 +7,19 @@ vk_api = vk.API(session, v='4.1.6')
 
 GID = 4569
 
-posts = vk_api.wall.get(  owner_id=-GID  ) #can use all methods from https://vk.com/dev/methods like this with vk_api.method.name(parameters)
-i = 1
-while i < 10:
-    post_id = (posts[i]['id'])
-    like = vk_api.likes.getList(type='post', owner_id=-GID, item_id=post_id, count=2, extended=1)
-    print(like)
-    i = i + 1
-
+for post in posts:
+    likes = vk_api.likes.getList(item_id = post['id'],...)#параметры нужные в скобки сама подставь.
+    #вот мы молучили список залайкавших профилей. идем по нему
+    user_likes = {} #это словарь вида {'uid1':[like1, like2...], 'uid2' [like1, like3], т.е. словарь где ключ
+    # - имя пользователя, а значение по ключу - список лайков
+    for like in likes['items']:
+        uid = like['uid']
+        if uid in user_likes: #ну тут надо уточнить как проверять в словаре на вхождение ключа, не помню точно
+            user_likes['uid'] = post['id'] #та же фигня, надо уточнить как именно добавлять значение в словарь списков по ключу
+        
+        #пока реализуем это, задачу упрощаем и в качестве вывода просто получим список пользовоателей, которые поставили больше одного лайка, т.е.
+    
+    for user in user_likes:
+        if len(user)>1:
+            print user #еще раз - это псевдокод, он только про логику, не будет работать, пока не доделан правильно.
+# i = 1
