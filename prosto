@@ -1,0 +1,34 @@
+import vk #need pip install vk, google 'vk api python' for module documentation
+SERVICE_KEY = '26ed4c1326ed4c1326ed4c135826b730c2226ed26ed4c137f375dd7e14f769494a0797b'
+#read about service keys https://vk.com/dev/access_token
+
+session = vk.Session(access_token=SERVICE_KEY)
+vk_api = vk.API(session, v='4.1.6')
+
+GID = 4569
+
+posts = vk_api.wall.get(  owner_id=-GID  ) #can use all methods from https://vk.com/dev/methods like this with vk_api.method.name(parameters)
+#user_likes = {}  # это словарь вида {'uid1':[like1, like2...], 'uid2' [like1, like3], т.е. словарь где ключ
+#так и не разобралась как из функции записывать параметры в словарь...
+#поэтому насиловала циклы, твой вариант лучше, правда надо разобраться со словарями)) как они работают я разобралась, но как из функции извлечь данные..
+# а пока я создала 2 бесполезных цикла, первый закоментирован, второй твой цикл))( который у меня бесконечный....
+# не получается еще извлечь параметр "uid"..
+#я только после твоего наброска узнала, что можно без проблем извлекать "items"...а с uid проблемы
+
+i = 1
+while i < 5:
+    post_id = (posts[i]['id'])
+    likes = vk_api.likes.getList(type='post', owner_id=-GID, item_id=post_id, count=1, extended=1)
+    #i=i+1
+    #like = vk_api.likes.getList(type='post', owner_id=-GID, item_id=post_id, count=1, extended=1)
+    #if likes['items']== like['items']:
+
+       # print(like['items'])
+
+    #else:
+       # i = i + 1
+
+    for items in likes:
+        if len('items') > 1:
+            print(likes['items'])
+            
