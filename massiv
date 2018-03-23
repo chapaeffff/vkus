@@ -1,0 +1,39 @@
+import vk #need pip install vk, google 'vk api python' for module documentation
+SERVICE_KEY = '26ed4c1326ed4c1326ed4c135826b730c2226ed26ed4c137f375dd7e14f769494a0797b'
+#read about service keys https://vk.com/dev/access_token
+
+session = vk.Session(access_token=SERVICE_KEY)
+vk_api = vk.API(session, v='4.1.6')
+
+GID = 4569
+
+posts = vk_api.wall.get(owner_id=-GID, count = 10, offset = 1)[1:]  #can use all methods from https://vk.com/dev/methods like this with vk_api.method.name(parameters)
+likespic=[]
+postspic=[]
+
+
+l={}
+for post in posts:
+
+    pid = post['id']
+    likes = vk_api.likes.getList(type='post', owner_id=-GID, item_id=pid)['users']
+    likespic.append(likes)
+    postspic.append(post['id'])
+    l = [dict(zip(postspic, likespic)) for postkey in postspic]
+    print(l)
+
+
+#    l = dict(zip(list(postspic), list(likespic))
+
+# l = {}
+# i = 0
+# for post in posts: #posts[0[ posts[1]  # i+=1, post = posts[]
+#     pid = post['id']
+#     likes = vk_api.likes.getList(type='post',  owner_id=-GID, item_id= pid)['users'] # параметры нужные в скобки сама подставь.
+#     likespic.append(likes)
+#     postspic.append(post)
+#     for x, y in itertools.izip(postspic, likespic):
+#         l[x] = y
+#
+#     print(l)
+
